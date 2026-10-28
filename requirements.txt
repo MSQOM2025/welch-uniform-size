@@ -1,0 +1,2 @@
+# Python standard library (fractions, math) is predominantly used.
+# No external heavy dependencies are required for the verification script.
