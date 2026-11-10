@@ -14,6 +14,21 @@ This repository contains the complete replication code and certified arithmetic 
   The script also verifies the boundary exclusion for `k ≤ 100` (underlying `q_k`) and certifies the lower bound `B_100 > 0.05` (Theorem 1).
 - `simulate_welch.R` — R script executing the Monte Carlo simulations (200,000 replications, seed 110) across sample sizes {50, 200, 1000, 5000} to assess finite-sample rejection rates.
 - `requirements.txt` — Python package dependencies.
+
+## Software Versions & Environment
+
+- Python: 3.10+ with `mpmath` (for high-precision and interval arithmetic) and standard-library modules `fractions` and `math`.
+- R: 4.3.0+ (base packages only).
+
+## Instructions for Replication
+
+### 1. Certified verification of L and M (Python)
+
+Run:
+
+```bash
+python verify_certificate.py
+```
 ## Computational verification notes
 
 The certified computations in `verify_certificate.py` use high-precision interval arithmetic via the `mpmath` library, with a working precision of 60 decimal digits. All intermediate quantities are computed with conservative directed-rounding margins, so that the reported intervals provably contain the exact values.
@@ -33,21 +48,6 @@ The script is fully deterministic: it uses no random number generation, no time-
 The current implementation uses `mpmath` (high-precision floating-point arithmetic with interval margins) rather than Python's `fractions.Fraction` for exact rational arithmetic. For the precision required here (final accuracy ~10⁻²⁵), the 60-digit `mpmath` precision is more than sufficient, and the directed-rounding margins ensure the reported intervals are rigorous.
 
 If exact rational arithmetic is preferred, the script can be adapted to use `fractions.Fraction` throughout; the mathematical structure of the computation is unchanged.
-
-## Software Versions & Environment
-
-- Python: 3.10+ with `mpmath` (for high-precision and interval arithmetic) and standard-library modules `fractions` and `math`.
-- R: 4.3.0+ (base packages only).
-
-## Instructions for Replication
-
-### 1. Certified verification of L and M (Python)
-
-Run:
-
-```bash
-python verify_certificate.py
-```
 
 Expected output (recorded in Appendix A of the manuscript):
 
